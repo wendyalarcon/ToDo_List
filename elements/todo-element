@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Dependencias/Elementos -->
+	<link href="../bower_components/polymer/polymer.html" rel="import">
+	<link href="../bower_components/paper-checkbox/paper-checkbox.html" rel="import">
+	<link href="../bower_components/paper-item/paper-item.html" rel="import">
+	<link href="../bower_components/paper-button/paper-button.html" rel="import">
+	<link href="../bower_components/paper-input/paper-input.html" rel="import">
+	<link href="../bower_components/paper-material/paper-material.html" rel="import">
+	<link href="../bower_components/paper-fab/paper-fab.html" rel="import">
+	<link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+</head>
+
+<dom-module id="todo-element" attributes="task user rid">
+  <style>
+    /* CSS todo-element */
+
+    .todo {
+		padding: 10px;
+	}
+    
+    paper-button {
+	    position: absolute;
+	    bottom: 3vh;
+		right: 3vw;
+		font-family: Arial, Helvetica, sans-serif;
+		
+    }
+    
+    .done {
+	    background: green;
+	    color: white;
+    }
+    
+    .info {
+	    font-style: italic;
+	    font-size: 14px;
+	    color: #696969;
+		padding-top: 0;
+		padding-bottom: 0;
+    }
+    
+    paper-material {
+		background-color: #fff;
+		max-width: 640px;
+		width: 90%;
+		margin: 25px auto;
+		position: relative;
+	}
+    
+    .info span {
+	    margin-left: 5px;
+    }
+    
+    paper-input {
+		margin: 0 2vw;
+	}
+	paper-fab {
+	    position: absolute;
+	    background:#FE2E2E;
+	    bottom: 2vh;
+	    right: 2vw;
+		width: 2px;
+		height: 2px;
+		
+    }
+    
+  </style>
+  <template>
+    <!-- DOM local de tu elemento -->
+    <paper-material class="todo" elevation="1">
+		<paper-fab icon="icons:clear" on-tap="compChanged"></paper-fab>
+	    <paper-item hidden="{{editing}}" id="task">{{task}}</paper-item> <!-- TAREA -->
+    </paper-material> <!-- data bindings de tu DOM local -->
+
+  </template>
+</dom-module>
+
+<script>
+  // registramos el elemento
+  Polymer({
+    is: "todo-element",
+
+    // añadimos propiedades y métodos
+
+    properties: {
+    	// declaramos las propiedades
+		task: {
+        	type: String,
+			value: ''
+    	},
+    	rid: {
+	    	type: Number,
+	    	value: -1
+    	},
+    },
+    // compChanged: cuando se marca el boton del task esta función dispara el evento
+    compChanged: function(e){
+	    if(e){ this.fire('complete',this); }
+    },
+	ready: function(e){
+	}
+  });
+</script>
